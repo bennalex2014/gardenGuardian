@@ -6,6 +6,7 @@ public class TurretScript : MonoBehaviour
     public float damage = 50f;
     public float fireRate = 1f; // Shots per second
     public float range = 5f;
+    public int goldCost = 10;
     
     [Header("References")]
     public GameObject projectilePrefab;

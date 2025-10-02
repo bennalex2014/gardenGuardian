@@ -12,6 +12,8 @@ public class CrowScript : MonoBehaviour
     public int damageToPlayer = 20;
     public int damageToCorn = 10;
     public int health = 100;
+    public GameObject coinPrefab;
+    public int goldOnDeath = 2;
 
     void Start()
     {
@@ -68,7 +70,19 @@ public class CrowScript : MonoBehaviour
         health -= (int)damage;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            killCrow();
         }
+    }
+
+    private void killCrow()
+    {
+        for (int i = 0; i < goldOnDeath; i++)
+        {
+            Vector2 randomOffset = Random.insideUnitCircle * 0.5f; // Adjust 0.5f for spread radius
+            Vector3 spawnPosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
+            Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
+        }
+        Destroy(gameObject);
+
     }
 }
