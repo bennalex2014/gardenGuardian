@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef21660de8206942a48a4d1a8a19282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  waveActive: 1
 --- !u!1 &339598848
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +225,7 @@ GameObject:
   - component: {fileID: 422355525}
   m_Layer: 0
   m_Name: Corn
-  m_TagString: Untagged
+  m_TagString: Corn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

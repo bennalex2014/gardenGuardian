@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3070870156825964533}
   - component: {fileID: 6110564432003586183}
+  - component: {fileID: 6092156899480105224}
   m_Layer: 0
   m_Name: Turret1
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,3 +91,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6092156899480105224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4601395632704852422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c959e874b233bb47b84674749d2648b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Turret1Script
+  damage: 50
+  fireRate: 1
+  range: 12
+  projectilePrefab: {fileID: 2021136740720998341, guid: e95013a4486449b4898b084987ff3108, type: 3}
+  firePoint: {fileID: 0}
+  showRangeGizmo: 1

@@ -11,11 +11,17 @@ public class TurretPlacementManager : MonoBehaviour
     [Header("Settings")]
     public float gridSize = 2f; // Adjust based on your turret size
     
+    [Header("Placement Validation")]
+    public LayerMask obstacleLayer; // Layer for things turrets can't be placed on
+    public Color validPlacementColor = new Color(1f, 1f, 1f, 0.5f); // White transparent
+    public Color invalidPlacementColor = new Color(1f, 0f, 0f, 0.5f); // Red transparent
+    
     // State
     private bool isPlacingTurret = false;
     private GameObject ghostTurret;
     private GameObject selectedTurretPrefab;
     private Vector2 lastMovementInput = Vector2.zero;
+    private bool isValidPlacement = true;
     
     // Input System reference
     private PlayerInput controls;
@@ -71,6 +77,46 @@ public class TurretPlacementManager : MonoBehaviour
             }
             
             lastMovementInput = movement;
+            
+            // Check if current position is valid
+            CheckPlacementValidity();
+        }
+    }
+    
+    void CheckPlacementValidity()
+    {
+        if (ghostTurret == null) return;
+        
+        // Check for overlapping objects
+        // Use a slightly smaller box to avoid edge cases (0.9 of grid size)
+        Vector2 checkSize = new Vector2(gridSize * 0.9f, gridSize * 0.9f);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(ghostTurret.transform.position, checkSize, 0f);
+        
+        bool hasOverlap = false;
+        
+        foreach (Collider2D col in colliders)
+        {
+            // Ignore the ghost turret itself
+            if (col.gameObject == ghostTurret) continue;
+            
+            // Check if overlapping with obstacles
+            if (col.CompareTag("Player") || 
+                col.CompareTag("Corn") || 
+                col.CompareTag("Crow") || 
+                col.CompareTag("Turret"))
+            {
+                hasOverlap = true;
+                break;
+            }
+        }
+        
+        isValidPlacement = !hasOverlap;
+        
+        // Update ghost color based on validity
+        SpriteRenderer sr = ghostTurret.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.color = isValidPlacement ? validPlacementColor : invalidPlacementColor;
         }
     }
     
@@ -126,6 +172,9 @@ public class TurretPlacementManager : MonoBehaviour
         
         ghostTurret = Instantiate(turretPrefab, startPosition, Quaternion.identity);
         
+        // Disable turret functionality on ghost
+        DisableGhostComponents(ghostTurret);
+        
         // Make ghost semi-transparent
         SpriteRenderer sr = ghostTurret.GetComponent<SpriteRenderer>();
         if (sr != null) 
@@ -135,8 +184,34 @@ public class TurretPlacementManager : MonoBehaviour
             sr.color = color;
         }
         
+        // Initial placement check
+        CheckPlacementValidity();
+        
         Debug.Log("Placement mode started. Use arrow keys to move, Space to confirm, Escape to cancel.");
         Debug.Log("Ghost spawned at: " + startPosition);
+    }
+    
+    void DisableGhostComponents(GameObject ghost)
+    {
+        // Disable the turret shooting script
+        TurretScript turretScript = ghost.GetComponent<TurretScript>();
+        if (turretScript != null)
+        {
+            turretScript.enabled = false;
+        }
+        
+        // Disable all colliders except triggers (keep trigger for overlap detection)
+        Collider2D[] colliders = ghost.GetComponents<Collider2D>();
+        foreach (Collider2D col in colliders)
+        {
+            if (!col.isTrigger)
+            {
+                col.enabled = false;
+            }
+        }
+        
+        // Disable any other components that shouldn't be active
+        // Add more here as needed for your specific turret setup
     }
     
     // Snap position to nearest grid point
@@ -152,8 +227,21 @@ public class TurretPlacementManager : MonoBehaviour
     {
         if (!isPlacingTurret) return;
         
+        // Only place if position is valid
+        if (!isValidPlacement)
+        {
+            Debug.Log("Cannot place turret here - invalid position!");
+            return;
+        }
+        
         // Place the real turret at ghost position
-        Instantiate(selectedTurretPrefab, ghostTurret.transform.position, Quaternion.identity);
+        GameObject placedTurret = Instantiate(selectedTurretPrefab, ghostTurret.transform.position, Quaternion.identity);
+        
+        // Make sure the real turret has the "Turret" tag for future collision detection
+        if (!placedTurret.CompareTag("Turret"))
+        {
+            placedTurret.tag = "Turret";
+        }
         
         Debug.Log("Turret placed at " + ghostTurret.transform.position);
         
@@ -185,11 +273,23 @@ public class TurretPlacementManager : MonoBehaviour
         isPlacingTurret = false;
         ghostTurret = null;
         lastMovementInput = Vector2.zero; // Reset movement tracking
+        isValidPlacement = true;
     }
     
     // Public getter for other scripts
     public bool IsPlacing() 
     {
         return isPlacingTurret;
+    }
+    
+    // Visualize placement check area in editor
+    void OnDrawGizmos()
+    {
+        if (isPlacingTurret && ghostTurret != null)
+        {
+            Gizmos.color = isValidPlacement ? Color.green : Color.red;
+            Vector2 checkSize = new Vector2(gridSize * 0.9f, gridSize * 0.9f);
+            Gizmos.DrawWireCube(ghostTurret.transform.position, checkSize);
+        }
     }
 }

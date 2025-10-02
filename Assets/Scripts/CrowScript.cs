@@ -62,4 +62,13 @@ public class CrowScript : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
     }
+
+    public void TakeDamage(float damage)
+    {
+        health -= (int)damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
