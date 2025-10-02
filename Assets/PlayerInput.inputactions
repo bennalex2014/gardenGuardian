@@ -128,6 +128,178 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "TurretPlacement",
+            "id": "c090e50a-2889-45e2-a830-671f2af85031",
+            "actions": [
+                {
+                    "name": "SelectTurret1",
+                    "type": "Button",
+                    "id": "c6a4719b-3c49-4387-ac27-4d5b074c4534",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectTurret2",
+                    "type": "Button",
+                    "id": "afc52e18-c634-4af0-9e16-dcff1f4589ef",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectTurret3",
+                    "type": "Button",
+                    "id": "06985821-928a-4f81-983e-fe318d952287",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveCursor",
+                    "type": "Value",
+                    "id": "0a60cd4f-4f60-4056-bee5-75568d3f2a15",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "f5a796e6-47a1-431f-806e-3b43c04e6081",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "e1f0d6a9-3ff9-4c7b-b80a-0f74ad94f374",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2b216979-ae41-4558-8291-2bdac622d9c3",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectTurret1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b0167bb-1531-4e41-a0b0-9ed8f3efdb91",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectTurret2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e28b81a-2190-4386-9a04-bcb4b74cd345",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectTurret3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "c086624e-39a5-4ae5-8467-ff0dc05cd0ab",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveCursor",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "2bc7e0b0-2aca-4c3f-b12c-597463c36067",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";wasd player",
+                    "action": "MoveCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "f06c7dc0-25a9-4e35-bb00-02fae6db7ca9",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";wasd player",
+                    "action": "MoveCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "59632e68-61c7-4a14-bb94-f256702b1c81",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";wasd player",
+                    "action": "MoveCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "c854cd8b-93a2-4754-9127-806fba6ca8fa",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";wasd player",
+                    "action": "MoveCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "73d5ec5e-65cc-4a7c-a331-d27b60f9d2a7",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a83b8897-4f07-4bcc-80cc-1e3ef1d60cc1",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

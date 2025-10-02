@@ -8,7 +8,7 @@ public class WaveManagerScript : MonoBehaviour
     void Start()
     {
         crowSpawner = FindFirstObjectByType<CrowSpawnerScript>();
-        startWave1();
+        // startWave1();
     }
 
     // Update is called once per frame
