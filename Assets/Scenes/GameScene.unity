@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 422355521}
   - component: {fileID: 422355524}
   - component: {fileID: 422355523}
+  - component: {fileID: 422355525}
   m_Layer: 0
   m_Name: Corn
   m_TagString: Untagged
@@ -331,7 +332,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -374,6 +375,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &422355525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422355520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7404ca6fbb1fe1445ba1c9ad40b82c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  health: 100
+  currentHealth: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,6 +810,52 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!1 &1365623225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1365623226}
+  - component: {fileID: 1365623227}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1365623226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365623225}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.76031, y: -3.19454, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1365623227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365623225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbcd8eb23aba4842916d2d8b8e7ecbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  corn: {fileID: 0}
+  checkCornHealth: 1
 --- !u!1 &1757175698
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +888,6 @@ MonoBehaviour:
   turret1Prefab: {fileID: 4601395632704852422, guid: da5c7edf288ba1c45ab3425a3dd7f7ef, type: 3}
   turret2Prefab: {fileID: 6342013750016798639, guid: c065310ec7f0ec6429c9639fed8b7887, type: 3}
   turret3Prefab: {fileID: 3405372858902254202, guid: 4a5c27d53602c514fb61af50164fb5b4, type: 3}
-  moveSpeed: 5
   gridSize: 2
 --- !u!4 &1757175700
 Transform:
@@ -855,3 +915,4 @@ SceneRoots:
   - {fileID: 422355522}
   - {fileID: 139332637}
   - {fileID: 1757175700}
+  - {fileID: 1365623226}
