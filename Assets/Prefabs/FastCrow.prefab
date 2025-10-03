@@ -187,9 +187,9 @@ MonoBehaviour:
   rotationSpeed: 5
   mapCenter: {x: 0, y: 0}
   damageToPlayer: 20
-  damageToCorn: 10
-  damageToTurret: 15
+  damageToCorn: 20
+  damageToTurret: 30
   attackCooldown: 1
-  health: 40
+  health: 50
   coinPrefab: {fileID: 2750012177010520363, guid: 4a32d1fe98f3c5a43aee14c549e9b126, type: 3}
-  goldOnDeath: 3
+  goldOnDeath: 2
