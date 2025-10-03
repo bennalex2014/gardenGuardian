@@ -923,6 +923,10 @@ MonoBehaviour:
   speed: 10
   gold: 0
   goldText: {fileID: 802714155}
+  maxHealth: 100
+  respawnTime: 5
+  respawnPoint: {x: 0, y: -5, z: 0}
+  _isDead: 0
 --- !u!58 &1282825303
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1114,8 +1118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurretPlacementManager
   turret1Prefab: {fileID: 4601395632704852422, guid: da5c7edf288ba1c45ab3425a3dd7f7ef, type: 3}
-  turret2Prefab: {fileID: 6342013750016798639, guid: c065310ec7f0ec6429c9639fed8b7887, type: 3}
-  turret3Prefab: {fileID: 3405372858902254202, guid: 4a5c27d53602c514fb61af50164fb5b4, type: 3}
+  turret2Prefab: {fileID: 4791802388524343708, guid: c065310ec7f0ec6429c9639fed8b7887, type: 3}
+  turret3Prefab: {fileID: 4758822150003251445, guid: 4a5c27d53602c514fb61af50164fb5b4, type: 3}
   gridSize: 2
   obstacleLayer:
     serializedVersion: 2

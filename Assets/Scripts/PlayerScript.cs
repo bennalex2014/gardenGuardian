@@ -114,7 +114,7 @@ public class PlayerScript : MonoBehaviour
         // Cannot take damage while dead
         if (_isDead) return;
 
-        if (collision.gameObject.CompareTag("Crow") || collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Crow"))
         {
             // You can refine the damage value later
             TakeDamage(10);

@@ -17,15 +17,15 @@ public class TurretScript : MonoBehaviour
     [Header("Debug")]
     public bool showRangeGizmo = true;
 
-    private float fireTimer = 0f;
-    private Transform currentTarget;
+    protected float fireTimer = 0f;
+    protected Transform currentTarget;
 
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
     private float _flashDuration = 0.2f;
     private float _flashTimer = 0f;
 
-    void Start()
+    protected virtual void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         if (_spriteRenderer != null)
@@ -34,7 +34,7 @@ public class TurretScript : MonoBehaviour
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
         // Find target if we don't have one
         if (currentTarget == null)
@@ -63,6 +63,7 @@ public class TurretScript : MonoBehaviour
             }
         }
 
+        // Flash effect
         if (_flashTimer > 0)
         {
             _flashTimer -= Time.deltaTime;
@@ -73,11 +74,10 @@ public class TurretScript : MonoBehaviour
         }
     }
 
-    void FindTarget()
+    protected virtual void FindTarget()
     {
         // Find all crows in the scene
         GameObject[] crows = GameObject.FindGameObjectsWithTag("Crow");
-
 
         float closestDistance = range;
         Transform closestCrow = null;
@@ -97,7 +97,7 @@ public class TurretScript : MonoBehaviour
         currentTarget = closestCrow;
     }
 
-    void Shoot()
+    protected virtual void Shoot()
     {
         if (projectilePrefab == null)
         {
@@ -123,11 +123,9 @@ public class TurretScript : MonoBehaviour
             projScript.SetDirection(direction);
             projScript.damage = damage;
         }
-
-        Debug.Log("Turret fired at " + currentTarget.name);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         health -= damage;
         Debug.Log("Turret took " + damage + " damage. Health: " + health);
@@ -138,7 +136,7 @@ public class TurretScript : MonoBehaviour
         }
     }
 
-    void DestroyTurret()
+    protected virtual void DestroyTurret()
     {
         Debug.Log("Turret destroyed!");
         Destroy(gameObject);
@@ -153,7 +151,7 @@ public class TurretScript : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, range);
         }
     }
-    
+
     public void FlashRed()
     {
         if (_spriteRenderer != null)
