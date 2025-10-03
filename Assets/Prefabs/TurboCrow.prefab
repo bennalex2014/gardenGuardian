@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2647580722553113823
+--- !u!1 &3465343359233447300
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3093198460290197925}
-  - component: {fileID: 2436056706606737912}
-  - component: {fileID: 4130496830956143285}
-  - component: {fileID: 1655774024678660605}
-  - component: {fileID: 4896945029433741934}
+  - component: {fileID: 1082584762604716089}
+  - component: {fileID: 2029102132848215511}
+  - component: {fileID: 2177202508716277266}
+  - component: {fileID: 2477012210207309213}
+  - component: {fileID: 1510975112945605823}
   m_Layer: 0
-  m_Name: BasicCrow
+  m_Name: TurboCrow
   m_TagString: Crow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3093198460290197925
+--- !u!4 &1082584762604716089
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647580722553113823}
+  m_GameObject: {fileID: 3465343359233447300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.02243, y: -2.51766, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -17.68, y: -7.88, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2436056706606737912
+--- !u!212 &2029102132848215511
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647580722553113823}
+  m_GameObject: {fileID: 3465343359233447300}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.46540874, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,14 +93,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &4130496830956143285
+--- !u!50 &2177202508716277266
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647580722553113823}
+  m_GameObject: {fileID: 3465343359233447300}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -120,13 +120,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &1655774024678660605
+--- !u!60 &2477012210207309213
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647580722553113823}
+  m_GameObject: {fileID: 3465343359233447300}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -170,13 +170,13 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &4896945029433741934
+--- !u!114 &1510975112945605823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647580722553113823}
+  m_GameObject: {fileID: 3465343359233447300}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4c259a6a6c1eb54abd27c8ae581c106, type: 3}
@@ -186,10 +186,10 @@ MonoBehaviour:
   detectionRadius: 3
   rotationSpeed: 5
   mapCenter: {x: 0, y: 0}
-  damageToPlayer: 20
-  damageToCorn: 10
-  damageToTurret: 30
+  damageToPlayer: 50
+  damageToCorn: 40
+  damageToTurret: 15
   attackCooldown: 1
-  health: 40
+  health: 150
   coinPrefab: {fileID: 2750012177010520363, guid: 4a32d1fe98f3c5a43aee14c549e9b126, type: 3}
-  goldOnDeath: 2
+  goldOnDeath: 10
