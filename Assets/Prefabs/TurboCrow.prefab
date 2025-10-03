@@ -186,10 +186,10 @@ MonoBehaviour:
   detectionRadius: 3
   rotationSpeed: 5
   mapCenter: {x: 0, y: 0}
-  damageToPlayer: 50
-  damageToCorn: 40
-  damageToTurret: 15
+  damageToPlayer: 70
+  damageToCorn: 50
+  damageToTurret: 100
   attackCooldown: 1
-  health: 150
+  health: 200
   coinPrefab: {fileID: 2750012177010520363, guid: 4a32d1fe98f3c5a43aee14c549e9b126, type: 3}
-  goldOnDeath: 10
+  goldOnDeath: 8

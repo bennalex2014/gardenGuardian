@@ -181,7 +181,7 @@ MonoBehaviour:
   damage: 30
   fireRate: 0.6
   range: 10
-  goldCost: 30
+  goldCost: 20
   health: 100
   maxHealth: 100
   projectilePrefab: {fileID: 4422551121503607569, guid: b6f3a4546a3ce47459f809c3e8c31627, type: 3}

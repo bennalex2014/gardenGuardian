@@ -1086,8 +1086,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bbcd8eb23aba4842916d2d8b8e7ecbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  corn: {fileID: 0}
+  corn: {fileID: 422355525}
+  waveManager: {fileID: 139332638}
   checkCornHealth: 1
+  checkWaveCompletion: 1
 --- !u!1 &1757175698
 GameObject:
   m_ObjectHideFlags: 0

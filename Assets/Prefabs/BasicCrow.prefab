@@ -190,6 +190,6 @@ MonoBehaviour:
   damageToCorn: 10
   damageToTurret: 30
   attackCooldown: 1
-  health: 40
+  health: 30
   coinPrefab: {fileID: 2750012177010520363, guid: 4a32d1fe98f3c5a43aee14c549e9b126, type: 3}
   goldOnDeath: 2

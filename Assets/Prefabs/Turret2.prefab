@@ -178,10 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5321471e7cdad8c498f24ddb816cadd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RapidFireTurret
-  damage: 2
-  fireRate: 12
+  damage: 1
+  fireRate: 18
   range: 14
-  goldCost: 30
+  goldCost: 25
   health: 100
   maxHealth: 100
   projectilePrefab: {fileID: 2021136740720998341, guid: e95013a4486449b4898b084987ff3108, type: 3}
