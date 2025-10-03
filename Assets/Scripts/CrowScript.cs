@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -11,9 +12,14 @@ public class CrowScript : MonoBehaviour
     private Transform _playerTransform;
     public int damageToPlayer = 20;
     public int damageToCorn = 10;
+    public int damageToTurret = 15;
+    public float attackCooldown = 1f; // Time between attacks
     public int health = 100;
     public GameObject coinPrefab;
     public int goldOnDeath = 2;
+
+    private WaveManagerScript waveManager;
+    private float attackTimer = 0f;
 
     void Start()
     {
@@ -23,11 +29,18 @@ public class CrowScript : MonoBehaviour
         {
             _playerTransform = player.transform;
         }
+
+        // Find wave manager for tracking
+        waveManager = FindFirstObjectByType<WaveManagerScript>();
     }
 
     void Update()
     {
-
+        // Update attack timer
+        if (attackTimer > 0f)
+        {
+            attackTimer -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -39,7 +52,7 @@ public class CrowScript : MonoBehaviour
     {
         Vector2 targetPosition;
 
-        if (_playerTransform != null)
+        if (_playerTransform != null && _playerTransform.GetComponent<PlayerScript>()._isDead == false)
         {
             float distanceToPlayer = Vector2.Distance(transform.position, _playerTransform.position);
 
@@ -74,15 +87,40 @@ public class CrowScript : MonoBehaviour
         }
     }
 
-    private void killCrow()
+    public void killCrow(Boolean dropsGold = true)
     {
-        for (int i = 0; i < goldOnDeath; i++)
+        // Spawn coins
+        if (dropsGold)
         {
-            Vector2 randomOffset = Random.insideUnitCircle * 0.5f; // Adjust 0.5f for spread radius
-            Vector3 spawnPosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
-            Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
+            for (int i = 0; i < goldOnDeath; i++)
+            {
+                Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * 0.5f;
+                Vector3 spawnPosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
+                Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
+            }
         }
-        Destroy(gameObject);
 
+        // Notify wave manager that a crow died
+        if (waveManager != null)
+        {
+            waveManager.OnCrowDied();
+        }
+
+        Destroy(gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Turret"))
+        {
+            TurretScript turret = collision.gameObject.GetComponent<TurretScript>();
+            if (turret != null)
+            {
+                turret.TakeDamage(damageToTurret);
+                Debug.Log("Crow hit turret for " + damageToTurret + " damage and died");
+            }
+            collision.gameObject.GetComponent<TurretScript>().FlashRed();
+            killCrow(false); // Crow dies on impact with turret
+        }
     }
 }

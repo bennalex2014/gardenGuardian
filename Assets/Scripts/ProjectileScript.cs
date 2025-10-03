@@ -55,7 +55,28 @@ public class ProjectileScript : MonoBehaviour
             }
             Debug.Log("Dealt " + damage + " damage to crow.");
             Debug.Log("Crow health after hit: " + (crow != null ? crow.health.ToString() : "N/A"));
-            
+
+            // Destroy the projectile
+            Destroy(gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if we hit a crow (if using collision instead of trigger)
+        if (collision.gameObject.CompareTag("Crow"))
+        {
+            Debug.Log("Projectile hit a crow!");
+
+            // Deal damage to the crow
+            CrowScript crow = collision.gameObject.GetComponent<CrowScript>();
+            if (crow != null)
+            {
+                crow.TakeDamage(damage);
+            }
+            Debug.Log("Dealt " + damage + " damage to crow.");
+            Debug.Log("Crow health after hit: " + (crow != null ? crow.health.ToString() : "N/A"));
+
             // Destroy the projectile
             Destroy(gameObject);
         }

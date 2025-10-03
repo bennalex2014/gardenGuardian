@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2647580722553113823}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: 0, z: 0}
+  m_LocalPosition: {x: -4.02243, y: -2.51766, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0.13161829, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -188,6 +188,8 @@ MonoBehaviour:
   mapCenter: {x: 0, y: 0}
   damageToPlayer: 20
   damageToCorn: 10
-  health: 100
+  damageToTurret: 30
+  attackCooldown: 1
+  health: 40
   coinPrefab: {fileID: 2750012177010520363, guid: 4a32d1fe98f3c5a43aee14c549e9b126, type: 3}
   goldOnDeath: 2

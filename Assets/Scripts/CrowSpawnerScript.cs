@@ -3,24 +3,59 @@ using System.Collections;
 
 public class CrowSpawnerScript : MonoBehaviour
 {
+    [Header("Crow Prefabs")]
     public GameObject basicCrowPrefab;
+    public GameObject fastCrowPrefab;
+    public GameObject strongCrowPrefab;
+    public GameObject turboCrowPrefab;
+
     public Camera mainCamera;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Spawns a specific crow type by name
+    /// </summary>
+    public void SpawnCrow(string crowType)
     {
+        GameObject prefabToSpawn = null;
 
+        switch (crowType)
+        {
+            case "BasicCrow":
+                prefabToSpawn = basicCrowPrefab;
+                break;
+            case "FastCrow":
+                prefabToSpawn = fastCrowPrefab;
+                break;
+            case "StrongCrow":
+                prefabToSpawn = strongCrowPrefab;
+                break;
+            case "TurboCrow":
+                prefabToSpawn = turboCrowPrefab;
+                break;
+            default:
+                Debug.LogError($"Unknown crow type: {crowType}");
+                return;
+        }
+
+        if (prefabToSpawn == null)
+        {
+            Debug.LogError($"Prefab not assigned for {crowType}!");
+            return;
+        }
+
+        Vector3 spawnPosition = GetRandomSpawnPosition();
+        Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
     }
 
-    // spawns a crow at a random position given if it spawning at the side of the map or at the top/bottom.
-    // should spawn a crow from a prefab named "BasicCrow" located in a prefabs folder within assets.
-    void spawnBasicCrow()
+    /// <summary>
+    /// Gets a random spawn position at the edge of camera bounds
+    /// </summary>
+    Vector3 GetRandomSpawnPosition()
     {
         // Get camera bounds in world space
         float cameraHeight = 2f * mainCamera.orthographicSize;
@@ -31,27 +66,26 @@ public class CrowSpawnerScript : MonoBehaviour
 
         Vector3 spawnPosition;
 
-        // Randomly choose to spawn from side or top/bottom
+        // 30% chance to spawn from top/bottom, 70% from sides
         if (Random.value > 0.7f)
-        {
-            // Spawn from left or right side
-            float x = Random.value > 0.5f ? horizontalBound : -horizontalBound;
-            float y = Random.Range(-verticalBound, verticalBound);
-            spawnPosition = new Vector3(x, y, 0);
-        }
-        else
         {
             // Spawn from top or bottom
             float x = Random.Range(-horizontalBound, horizontalBound);
             float y = Random.value > 0.5f ? verticalBound : -verticalBound;
             spawnPosition = new Vector3(x, y, 0);
         }
+        else
+        {
+            // Spawn from left or right side
+            float x = Random.value > 0.5f ? horizontalBound : -horizontalBound;
+            float y = Random.Range(-verticalBound, verticalBound);
+            spawnPosition = new Vector3(x, y, 0);
+        }
 
-        Instantiate(basicCrowPrefab, spawnPosition, Quaternion.identity);
+        return spawnPosition;
     }
 
-    // calls spawnCrow() multiple times to spawn a set number of crows across a period of time.
-    // parameters: int numberOfCrows, float timePeriod
+    // Legacy method - keeping for backwards compatibility if needed
     public void spawnBasicCrows(int numberOfCrows, float timePeriod)
     {
         StartCoroutine(SpawnCrowsOverTime(numberOfCrows, timePeriod));
@@ -63,7 +97,7 @@ public class CrowSpawnerScript : MonoBehaviour
 
         for (int i = 0; i < numberOfCrows; i++)
         {
-            spawnBasicCrow();
+            SpawnCrow("BasicCrow");
             yield return new WaitForSeconds(delayBetweenSpawns);
         }
     }

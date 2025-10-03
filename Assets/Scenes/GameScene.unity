@@ -163,7 +163,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef21660de8206942a48a4d1a8a19282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  waveActive: 1
+  waves: []
+  delayBetweenWaves: 8
+  startingGold: 20
+  currentWaveIndex: 0
+  activeCrowCount: 0
+  waveInProgress: 0
+  spawningComplete: 0
+  allWavesComplete: 0
 --- !u!1 &339598848
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +216,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   basicCrowPrefab: {fileID: 2647580722553113823, guid: 8655810c9ab945f4a8e5eae501e1e144, type: 3}
+  fastCrowPrefab: {fileID: 8029261324403614767, guid: a33b661a54f4c1b4a8d500ef2e367f7f, type: 3}
+  strongCrowPrefab: {fileID: 902781875507414716, guid: 92503b7668a0bcf40a6e0f4bba67dc15, type: 3}
+  turboCrowPrefab: {fileID: 3465343359233447300, guid: 6dc02fe0dd73163409fa8a190b7bbbc6, type: 3}
   mainCamera: {fileID: 519420031}
 --- !u!1 &422355520
 GameObject:
@@ -278,7 +288,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.62984747, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.95856124, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -333,7 +343,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -471,7 +481,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.046269566, g: 0.42138356, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.25871196, g: 0.64779866, b: 0.27702194, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -564,7 +574,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000e3252d35
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -846,7 +856,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.35955048, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.61006284, g: 0.39246407, b: 0.18225142, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -910,7 +920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d77da41e310ef41a9c13bc857dd3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
-  speed: 5
+  speed: 10
   gold: 0
   goldText: {fileID: 802714155}
 --- !u!58 &1282825303

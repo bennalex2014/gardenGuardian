@@ -22,13 +22,25 @@ public class TurretPlacementManager : MonoBehaviour
     private GameObject selectedTurretPrefab;
     private Vector2 lastMovementInput = Vector2.zero;
     private bool isValidPlacement = true;
-    
+
     // Input System reference
     private PlayerInput controls;
+
+    // Player reference
+    private PlayerScript _playerScript;
     
-    void Awake() 
+    void Awake()
     {
         controls = new PlayerInput();
+    }
+
+    void Start()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            _playerScript = player.GetComponent<PlayerScript>();
+        }
     }
     
     void OnEnable() 
@@ -86,32 +98,43 @@ public class TurretPlacementManager : MonoBehaviour
     void CheckPlacementValidity()
     {
         if (ghostTurret == null) return;
-        
+
         // Check for overlapping objects
         // Use a slightly smaller box to avoid edge cases (0.9 of grid size)
         Vector2 checkSize = new Vector2(gridSize * 0.9f, gridSize * 0.9f);
         Collider2D[] colliders = Physics2D.OverlapBoxAll(ghostTurret.transform.position, checkSize, 0f);
-        
+
         bool hasOverlap = false;
-        
+
         foreach (Collider2D col in colliders)
         {
             // Ignore the ghost turret itself
             if (col.gameObject == ghostTurret) continue;
-            
+
             // Check if overlapping with obstacles
-            if (col.CompareTag("Player") || 
-                col.CompareTag("Corn") || 
-                col.CompareTag("Crow") || 
+            if (col.CompareTag("Player") ||
+                col.CompareTag("Corn") ||
+                col.CompareTag("Crow") ||
                 col.CompareTag("Turret"))
             {
                 hasOverlap = true;
                 break;
             }
         }
-        
-        isValidPlacement = !hasOverlap;
-        
+
+        // Check if player has enough gold
+        bool hasEnoughGold = true;
+        if (_playerScript != null && selectedTurretPrefab != null)
+        {
+            TurretScript turretScript = selectedTurretPrefab.GetComponent<TurretScript>();
+            if (turretScript != null)
+            {
+                hasEnoughGold = _playerScript.gold >= turretScript.goldCost;
+            }
+        }
+
+        isValidPlacement = !hasOverlap && hasEnoughGold;
+
         // Update ghost color based on validity
         SpriteRenderer sr = ghostTurret.GetComponent<SpriteRenderer>();
         if (sr != null)
@@ -223,28 +246,38 @@ public class TurretPlacementManager : MonoBehaviour
         return new Vector3(snappedX, snappedY, position.z);
     }
     
-    void OnConfirmPlacement(InputAction.CallbackContext context) 
+    void OnConfirmPlacement(InputAction.CallbackContext context)
     {
         if (!isPlacingTurret) return;
-        
+
         // Only place if position is valid
         if (!isValidPlacement)
         {
-            Debug.Log("Cannot place turret here - invalid position!");
+            Debug.Log("Cannot place turret here - invalid position or not enough gold!");
             return;
         }
-        
+
         // Place the real turret at ghost position
         GameObject placedTurret = Instantiate(selectedTurretPrefab, ghostTurret.transform.position, Quaternion.identity);
-        
+
+        // Deduct gold cost
+        if (_playerScript != null)
+        {
+            TurretScript turretScript = placedTurret.GetComponent<TurretScript>();
+            if (turretScript != null)
+            {
+                _playerScript.gold -= turretScript.goldCost;
+            }
+        }
+
         // Make sure the real turret has the "Turret" tag for future collision detection
         if (!placedTurret.CompareTag("Turret"))
         {
             placedTurret.tag = "Turret";
         }
-        
+
         Debug.Log("Turret placed at " + ghostTurret.transform.position);
-        
+
         ExitPlacementMode();
     }
     
